@@ -16,7 +16,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE TABLE IF NOT EXISTS transactions (id VARCHAR(255)  NOT NULL, TransactionDate INT, Currency VARCHAR(3), Amount FLOAT, Vendor VARCHAR(255), CardType ENUM('Visa','Mastercard', 'AMEX'), CardNumber VARCHAR(16), Address VARCHAR(255), CountryOrigin VARCHAR(2)), PRIMARY KEY (id)")
+mycursor.execute("CREATE TABLE IF NOT EXISTS transactions (id VARCHAR(255)  NOT NULL PRIMARY KEY, TransactionDate INT, Currency VARCHAR(3), Amount FLOAT, Vendor VARCHAR(255), CardType ENUM('Visa','Mastercard', 'AMEX'), CardNumber VARCHAR(16), Address VARCHAR(255), CountryOrigin VARCHAR(2))")
 
 import random
 import uuid 
@@ -28,11 +28,15 @@ countries = ('AF','AX','AL','DZ','AS','AD','AO','AI','AQ','AG','AR','AM','AW','A
 
 card_type = ('Visa','Mastercard','AMEX')
 
-add_transaction = "INSERT INTO transactions (id, Transaction_Date, Currency, Amount, Vendor, CardType, CardNumber, address, CountryOrigin) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+add_transaction = "INSERT INTO transactions (id, TransactionDate, Currency, Amount, Vendor, CardType, CardNumber, address, CountryOrigin) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 import sys
 
-n = sys.argv[1]
+try:
+    n = int(sys.argv[1])
+except IndexError as error:
+    n = 20000
+    
 if n > 20000:
     raise Exception('Sorry the amount of transactions is too big')
 
@@ -58,6 +62,8 @@ for i in range(n):
     )
 
     mycursor.execute(add_transaction, transaction_data)
+
+print(n, 'transcations inserted')
 
 mycursor.close
 mydb.close

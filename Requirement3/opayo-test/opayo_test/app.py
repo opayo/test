@@ -1,9 +1,32 @@
 import json
+import sys
+import os
+import logging
+import pymysql
+import boto3
+import rds_config
 
-# import requests
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
+#rds settings
+host  = os.environ['DB_HOST']
+port = os.environ['DB_PORT']
+db_name = os.environ['DB_NAME']
+password = rds_config.DB_PASSWORD
+user = rds_config.DB_USER
+try:
+    conn = pymysql.connect(host=host, user=user, passwd=password, port=int(port),
+                            db=db_name, connect_timeout=5)
+except pymysql.MySQLError as e:
+    logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
+    logger.error(e)
+    sys.exit()
+
+logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 def lambda_handler(event, context):
+    logger.info(event)
     """Sample pure Lambda function
 
     Parameters
@@ -32,6 +55,11 @@ def lambda_handler(event, context):
     #     print(e)
 
     #     raise e
+    
+    select_statement = 'select * from transactions where TransactionDate > %(days)s '
+    cardtype_statement = ' and CardType = %(card_type)s'
+    country_statement = ' and CountryOrigin = %(country)s'
+    amount_statement = ' and Amount between %(from)s and %(to)s'
 
     return {
         "statusCode": 200,

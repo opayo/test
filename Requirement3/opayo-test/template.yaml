@@ -8,21 +8,92 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
+
+Parameters:
+  IAMUsername:
+    Description: User who will own the RDS instance 
+    Type: String
+    Default: Administrator 
+  OpayoSG:
+    Description: "Lambda security group ID"
+    Type: List<AWS::EC2::SecurityGroup::Id>
+  OpayoSubnets:
+    Description: "Lambda subnets"
+    Type: List<AWS::EC2::Subnet::Id>
+  DBInstanceID:
+    Default: opayodbinstance
+    Description: My database instance
+    Type: String
+    MinLength: '1'
+    MaxLength: '63'
+    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    ConstraintDescription: >-
+      Must begin with a letter and must not end with a hyphen or contain two
+      consecutive hyphens.
+  DBName:
+    Default: opayodb
+    Description: My database
+    Type: String
+    MinLength: '1'
+    MaxLength: '64'
+    AllowedPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    ConstraintDescription: Must begin with a letter and contain only alphanumeric characters.
+  DBInstanceClass:
+    Default: db.t2.micro
+    Description: DB instance class
+    Type: String
+    ConstraintDescription: Must select a valid DB instance type.
+  DBAllocatedStorage:
+    Default: '20'
+    Description: The size of the database (GiB)
+    Type: Number
+    MinValue: '5'
+    MaxValue: '1024'
+    ConstraintDescription: must be between 20 and 65536 GiB.
 
 Resources:
-  OpayoTestFunction:
+  Lambda:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: opayo_test/
       Handler: app.lambda_handler
-      Runtime: python3.8
+      Runtime: python3.7
+      VpcConfig:
+        SecurityGroupIds: !Ref OpayoSG
+        SubnetIds: !Ref OpayoSubnets
+      Environment:
+        Variables:
+          DB_HOST: !GetAtt OpayoMySQL.Endpoint.Address
+          DB_PORT: !GetAtt OpayoMySQL.Endpoint.Port
+          DB_NAME: !Ref DBName
       Events:
         OpayoTest:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /transactions
             Method: get
+
+  OpayoMySQLSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: 
+      DBSubnetGroupDescription: "DB Subnet Group for Opayo technical test"
+      SubnetIds: !Ref OpayoSubnets
+
+  OpayoMySQL:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      BackupRetentionPeriod: 0
+      DBInstanceIdentifier: !Ref DBInstanceID
+      DBName: !Ref DBName
+      DBInstanceClass: !Ref DBInstanceClass
+      AllocatedStorage: !Ref DBAllocatedStorage
+      Engine: MySQL
+      MasterUsername: 'admin'
+      MasterUserPassword: 'password'
+      DBSubnetGroupName: !Ref OpayoMySQLSubnetGroup
+      VPCSecurityGroups: !Ref OpayoSG
+      EnableIAMDatabaseAuthentication: true
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -31,9 +102,9 @@ Outputs:
   OpayoTestApi:
     Description: "API Gateway endpoint URL for Prod stage for Opayo technical test function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/transactions/"
-  OpayoTestFunction:
+  Lambda:
     Description: "Opayo Test Lambda Function ARN"
-    Value: !GetAtt OpayoTestFunction.Arn
-  OpayoTestFunctionIamRole:
+    Value: !GetAtt Lambda.Arn
+  LambdaIamRole:
     Description: "Implicit IAM Role created for Opayo Test function"
-    Value: !GetAtt OpayoTestFunctionRole.Arn
+    Value: !GetAtt LambdaRole.Arn

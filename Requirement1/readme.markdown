@@ -40,7 +40,7 @@ Assumptions
 ...........
 ]
 ```
-2) I assume the MySQL database should be installed separately and the access to the instance would be added manually
+2) I assume the MySQL database should be installed separately and the access to the instance would be configured manually
 
 
 Installation

@@ -1,10 +1,11 @@
 ﻿SOFTWARE ENGINEER PYTHON TEST
 =============================
 
-#SCENARIO
-Here at Opayo we are always looking at ways to improve our core automation tools
-and reporting dashboard’s. We love to test and simulate as much as we can.
+SCENARIO
+
+Here at Opayo we are always looking at ways to improve our core automation tools and reporting dashboard’s. We love to test and simulate as much as we can.
 Given a Relational Database Schema or NoSQL collection consisting of -
+```
 Table Name - transaction
 Id string – primary key (please think about the randomness of this)
 Date int – timestamp of payment in unix ms
@@ -15,7 +16,9 @@ CardType string/ENUM – the payment type i.e. Visa, Mastercard
 CardNumber string – the card number of the requestor
 Address string – the address of the requestor
 CountryOrigin string – the country of transaction origin in CountryCode ie UK, US
-##Requirement 1
+```
+Requirement 1
+
 Write a REST service with the Python framework of your choice connecting to a
 mysql/mongodb database. We should be able to query this service to obtain the
 following information -
@@ -34,8 +37,10 @@ Assumptions
 [['0491d83e-87d4-11eb-ad7d-068cf7dea69a', 1616037000, '£', 267.11, 'Tesco', 'Visa', '2247561869095639', 'London', 'UK'],
 ['04b5c140-87d4-11eb-ad7d-068cf7dea69a', 1615806369, '$', 746.96, 'Wallmart', 'Visa', '3203116777107131', 'New York', 'US'],
 ['04cb34da-87d4-11eb-ad7d-068cf7dea69a', 1615829018, '¥', 439.5, 'Ma-suya Azabu-Juban', 'AMEX', '7456389190278573', 'Tokio', 'JP']
+...........
+]
 ```
-2) I assume the MySQL database should be installed separately and the configuration of the instance would be added manually
+2) I assume the MySQL database should be installed separately and the access to the instance would be added manually
 
 
 Installation
@@ -47,8 +52,14 @@ You can unzip the source from zip file and then install all dependancies:
     cd test/Requirement1
     pip install -r requirements.txt
 
-After you have unzipped and installed all dependancies, please open rds_config.py in the same folder and amend the database access configuration manually.
-
+After you have done that, please open rds_config.py in the same folder and manually amend the database access:
+```python
+DB_HOST = 'your_host'
+DB_PORT = your_port
+DB_USER = 'your_user'
+DB_PASSWORD = 'your_password'
+DB_NAME = 'your_database'
+```
 Execution
 ---------
 

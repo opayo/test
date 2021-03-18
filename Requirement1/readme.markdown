@@ -130,7 +130,7 @@ print(response.text)
 #[[['0491d83e-87d4-11eb-ad7d-068cf7dea69a', 1616037000, '£', 267.11, 'Tesco', 'Visa', '2247561869095639', 'London', 'UK'], ['04b5c140-87d4-11eb-ad7d-068cf7dea69a', 1615806369, '$', 746.96, 'Wallmart', 'Visa', '3203116777107131', 'New York', 'US'], ['04cb34da-87d4-11eb-ad7d-068cf7dea69a', 1615829018, '¥', 439.5, 'Ma-suya Azabu-Juban', 'AMEX', '7456389190278573', 'Tokio', 'JP']..........
 
 ```
-While n is a mandatory parameter, Transactions API supports optional parameters:
+While n is a mandatory parameter, Transactions API also supports optional parameters:
 CardType to filter out the transactions by card type
 CountryOrigin to filter out them by country
 and a pair of parameters AmountFrom and AmountTo to obtain the list of all transactions where the Amount is between AmountFrom and AmountTo 

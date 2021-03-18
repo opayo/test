@@ -20,12 +20,14 @@ class TestTransactions(unittest.TestCase):
     conn = pymysql.connect(host=rds_config.DB_HOST, user=rds_config.DB_USER, passwd=rds_config.DB_PASSWORD, port=rds_config.DB_PORT,
                                     db=rds_config.DB_NAME, connect_timeout=5, autocommit=True)
                                     
-#    def __init__(self): 
-#        create_table = "CREATE TABLE IF NOT EXISTS transactions (id VARCHAR(255)  NOT NULL PRIMARY KEY, TransactionDate INT, Currency VARCHAR(3), Amount FLOAT, Vendor VARCHAR(255), CardType ENUM('Visa','Mastercard', 'AMEX'), CardNumber VARCHAR(16), Address VARCHAR(255), CountryOrigin VARCHAR(2))"
+    def __init__(self, *args, **kwargs): 
+        super(TestTransactions, self).__init__(*args, **kwargs)
         
-#        with self.conn.cursor() as cur:
-#            response = cur.execute(create_table)
-#            print(response)
+        create_table = "CREATE TABLE IF NOT EXISTS transactions (id VARCHAR(255)  NOT NULL PRIMARY KEY, TransactionDate INT, Currency VARCHAR(3), Amount FLOAT, Vendor VARCHAR(255), CardType ENUM('Visa','Mastercard', 'AMEX'), CardNumber VARCHAR(16), Address VARCHAR(255), CountryOrigin VARCHAR(2))"
+        
+        with self.conn.cursor() as cur:
+            response = cur.execute(create_table)
+
                                     
     def insert_transaction(self, days, CardType = None, CountryOrigin = None, AmountFrom = None, AmountTo = None):
         add_transaction = "INSERT INTO transactions (id, TransactionDate, Currency, Amount, Vendor, CardType, CardNumber, address, CountryOrigin) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"

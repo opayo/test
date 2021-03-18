@@ -38,7 +38,7 @@ except IndexError as error:
     n = 20000
     
 if n > 20000:
-    raise Exception('Sorry the amount of transactions is too big')
+    raise Exception('Sorry the volume of transactions is too big')
 
 for i in range(n):
     transaction_data = (

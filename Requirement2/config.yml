@@ -1,5 +1,5 @@
 mysql:
-    host: database-opayo.cqosygi6lkwe.eu-west-2.rds.amazonaws.com
+    host: opayodbinstance.cqosygi6lkwe.eu-west-2.rds.amazonaws.com
     user: admin
     password: password
     db: opayo

@@ -11,10 +11,6 @@ Globals:
     Timeout: 30
 
 Parameters:
-  IAMUsername:
-    Description: User who will own the RDS instance 
-    Type: String
-    Default: Administrator 
   OpayoSG:
     Description: "Lambda security group ID"
     Type: List<AWS::EC2::SecurityGroup::Id>
@@ -22,7 +18,7 @@ Parameters:
     Description: "Lambda subnets"
     Type: List<AWS::EC2::Subnet::Id>
   DBInstanceID:
-    Default: opayodbinstance
+    Default: OpayodDBInstance
     Description: My database instance
     Type: String
     MinLength: '1'
@@ -32,7 +28,7 @@ Parameters:
       Must begin with a letter and must not end with a hyphen or contain two
       consecutive hyphens.
   DBName:
-    Default: opayodb
+    Default: Opayo
     Description: My database
     Type: String
     MinLength: '1'

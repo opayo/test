@@ -58,7 +58,7 @@ The first command will build the source of your application. The second command 
 You can find your API Gateway Endpoint URL in the output values displayed after deployment.
 
 ## Random data
-You can execute script from Requirement 2 to generate the random data in the transactions table. To achieve that install the script on the box that has access to mySQL instance. Amend the config.yml file with the details of your database endpoint. Please create a new database user and password in case if do not want to use the dafult admin account.
+You can execute script from Requirement 2 to generate the random data in the transactions table. To achieve that install the script on the box that has access to mySQL instance. Amend the config.yml file with the details of your database endpoint. Please create a new database user and password in case if do not want to use the default admin account.
 
 ## Execution
 

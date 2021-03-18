@@ -1,6 +1,6 @@
 mysql:
-    host: opayodbinstance.cqosygi6lkwe.eu-west-2.rds.amazonaws.com
+    host: opayodbinstance.c1miyawf85d1.eu-west-1.rds.amazonaws.com
     user: admin
     password: password
-    db: opayo
+    db: opayodb
     port: 3306

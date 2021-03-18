@@ -101,3 +101,6 @@ Outputs:
   LambdaIamRole:
     Description: "Implicit IAM Role created for Opayo Test function"
     Value: !GetAtt LambdaRole.Arn
+  OpayoMySQL:
+    Description: "mySQL Endpoint URL and port for the database"
+    Value: !Sub "${OpayoMySQL.Endpoint.Address}:${OpayoMySQL.Endpoint.Port}"

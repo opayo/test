@@ -21,7 +21,7 @@ The application uses several AWS resources, including mySQL instance, Lambda fun
 ## Assumptions
 1. I assume that you already have AWS CLI and SAM installed and configured on your desktop 
 2. I assume that VPC, private subnets and security groups are already configured and available for opayo test
-3. The template would create mySQL instance with admin/password account. In case you wish Lambda uses a different account, you shoud create it manually and then update the config file.
+3. The template would create mySQL instance with admin/password account. In case you wish Lambda uses a different account, you should create it manually and then update the config file.
 
 ## Deploy the application
 

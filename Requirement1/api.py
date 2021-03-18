@@ -47,7 +47,6 @@ def execute_select(days, CardType , CountryOrigin , AmountFrom , AmountTo ):
         bind_variables["from"] = AmountFrom
         bind_variables["to"] = AmountTo
         
-    print(select_statement, bind_variables)
     with conn.cursor() as cur:
         cur.execute(select_statement, bind_variables)
         result = cur.fetchall()
@@ -64,28 +63,7 @@ def home():
     amount_to = request.args.get("AmountTo", type=float)
     
     if days is None:
-        #when nothing available in values, check data property
-        #but first make sure that the size of data is not too big 
-        #or it might cause memory problems on the server
-        if request.content_length > 100*1024*1024:
-            raise Exception("Content is too big")
-        
-        data = json.loads(request.data)
-        try:
-            days = data.get("n")
-        except Exception as exc: 
-            #when param N not found, raise the exception
-            raise Exception('Argument "n" is not found') from exc
-        
-        #non-mandotary params
-        if "CardType" in data:
-            card_type = data["CardType"]  
-        if "CountryOrigin" in data:
-            country = data["CountryOrigin"]
-        if "AmountFrom" in data:
-            amount_from = data["AmountFrom"]
-        if "AmountTo" in data:
-            amount_to = data["AmountTo"]
+        raise Exception('Argument "n" is not found')
             
     result = execute_select(days, card_type, country, amount_from, amount_to)
 

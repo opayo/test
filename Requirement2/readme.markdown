@@ -30,7 +30,7 @@ Assumptions
 -----------
 1) Id column would be populated as UUID
 2) Date is reserved word so the column would be called TransactionDate
-3) I assume the MySQL database should be installed separately and the access to the instance would be added manually
+3) I assume the MySQL database should be installed separately and the access to the instance would be configured manually
 
 
 Installation

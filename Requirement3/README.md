@@ -4,7 +4,7 @@ foundation of a larger project that needs to be deployed into AWS; Provide detai
 how you would deploy this into multiple environments (Dev, QA, Pre-production and
 Production) and how this would be updated and maintained.
 
-1) I have re writen the api.py into app.py to adopt the code for work in the AWS clouds. I have utilised the native AWS services as SAM, REST APIs, RDS and Lambda to create and run the application
+1) I have re writen the api.py into app.py to adopt the code to work in the AWS clouds. I have utilised the native AWS services as SAM, REST APIs, RDS and Lambda to create and run the application
 2) The scrip deploys lambda to the production stage of the RESTY API. Amazon recomends using different stages for different environments Dev, QA, Pre-production and
 Production)
 3) Another option would be to set up a CodePipeline which would build, deploy, test and deliver the changes as soon as they committed by developers into source code.

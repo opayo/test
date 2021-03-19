@@ -63,7 +63,7 @@ for i in range(n):
 
     mycursor.execute(add_transaction, transaction_data)
 
-print(n, 'transcations inserted')
+print(n, 'transactions inserted')
 
 mycursor.close
 mydb.close

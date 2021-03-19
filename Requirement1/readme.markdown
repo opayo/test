@@ -46,7 +46,7 @@ Assumptions
 Installation
 ------------
 
-You can unzip the source from zip file and then install all dependancies:
+You can unzip the source from the zip file and then install all dependencies:
 
     unzip opayo_test.zip
     cd test/Requirement1
@@ -106,7 +106,7 @@ Transactions API
 ---------
 The API supports the GET method and returns the transactions matching the criteria provided by the requestor.
 
-To obtain the list of transactions made in the last n days, you should send the request with `n` as a key e.g. `{n:5}` to the end point `http://localhost:5000/transactions`
+To obtain the list of transactions made in the last n days, you should send the request with `n` as a key e.g. `{n:5}` to the endpoint `http://localhost:5000/transactions`
 
 The response you receive would be in the list format:
 ```

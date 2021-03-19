@@ -29,14 +29,14 @@ argument of how many transactions it should generate.
 Assumptions
 -----------
 1) Id column would be populated as UUID
-2) Date is reserved word so the column would be called TransactionDate
+2) Date is a reserved word so the column would be called TransactionDate
 3) I assume the MySQL database should be installed separately and the access to the instance would be configured manually
 
 
 Installation
 ------------
 
-You can unzip the source from zip file and then install all dependancies:
+You can unzip the source from the zip file and then install all dependencies:
 
     cd test/Requirement2
     pip install -r requirements.txt
@@ -59,13 +59,13 @@ To run the script open a terminal and execute the following command in the folde
 python3 generate.py 10
 ```
 
-You should see the confirmation that the script succsfully complteted its task:
+You should see the confirmation that the script successfully completed its task:
 
 ```
-10 transcations inserted
+10 transactions inserted
 ```
 
-If no parameter provided, the script will insert 20000 of randomly generated transactions 
+If no parameter provided, the script will insert 20000 randomly generated transactions 
 
 Exceptions
 ----------

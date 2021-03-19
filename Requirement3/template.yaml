@@ -18,7 +18,7 @@ Parameters:
     Description: "Lambda subnets"
     Type: List<AWS::EC2::Subnet::Id>
   DBInstanceID:
-    Default: OpayodDBInstance
+    Default: OpayoDBInstance
     Description: My database instance
     Type: String
     MinLength: '1'
